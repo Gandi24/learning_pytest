@@ -44,3 +44,34 @@ else:
 for tweet in tweet_lenghts:
     print(tweet)
     print("test")
+
+
+def print_line():
+    print("=====")
+
+
+print_line()
+
+
+def type_print(var):
+    print(var, type(var))
+
+
+type_print(1)
+
+
+def custom_print(var, list_var=None, *args, **kwargs):
+    print("START")
+    print("VAR", var)
+    if list_var:
+        for element in list_var:
+            print("LIST VAR", element)
+    print("ARGS", args)
+    print("KWARGS", kwargs)
+    print("END")
+
+
+custom_print(1)
+custom_print(1, [1, 2, 3])
+
+custom_print(1, [1, 2, 3], 'arg3', 'arg4', arg5=1, arg6={'test': 'bla'})
