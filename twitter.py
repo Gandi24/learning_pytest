@@ -7,6 +7,9 @@ class Twitter(object):
     def __init__(self):
         self.tweets = []
 
+    def delete(self):
+        print("It's the end")
+
     def tweet(self, message):
         if len(message) > 160:
             raise Exception("Message too long.")

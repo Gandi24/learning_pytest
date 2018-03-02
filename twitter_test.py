@@ -3,19 +3,23 @@ import pytest
 from twitter import Twitter
 
 
-def test_twitter_initialization():
+@pytest.fixture
+def twitter():
     twitter = Twitter()
+    yield twitter
+    twitter.delete()
+
+
+def test_twitter_initialization(twitter):
     assert twitter
 
 
-def test_tweet_single_message():
-    twitter = Twitter()
+def test_tweet_single_message(twitter):
     twitter.tweet('Test message')
     assert twitter.tweets == ['Test message']
 
 
-def test_tweet_long_message():
-    twitter = Twitter()
+def test_tweet_long_message(twitter):
     with pytest.raises(Exception):
         twitter.tweet('test'*41)
     assert twitter.tweets == []
@@ -28,6 +32,5 @@ def test_tweet_long_message():
         ("Test message #first", ["first"]),
         ("Test message #first #second", ["first", "second"])
 ))
-def test_tweet_with_hashtag(message, expected):
-    twitter = Twitter()
+def test_tweet_with_hashtag(twitter, message, expected):
     assert twitter.find_hashtags(message) == expected
