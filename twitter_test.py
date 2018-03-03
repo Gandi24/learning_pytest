@@ -3,9 +3,9 @@ import pytest
 from twitter import Twitter
 
 
-@pytest.fixture
-def twitter():
-    twitter = Twitter()
+@pytest.fixture(params=[None, 'test.txt'])
+def twitter(request):
+    twitter = Twitter(backend=request.param)
     yield twitter
     twitter.delete()
 
