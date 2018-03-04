@@ -95,6 +95,7 @@ def test_twitter_get_all_hashtags(avatar_mock, twitter):
     twitter.tweet('Test #third')
     assert twitter.get_all_hashtags() == {'first', 'second', 'third'}
 
+
 @patch.object(requests, 'get', return_value=ResponseGetMock())
 def test_twitter_get_all_hashtags_not_found(avatar_mock, twitter):
     twitter.tweet('Test first')
