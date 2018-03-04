@@ -11,18 +11,6 @@ class ResponseGetMock(object):
         return {'avatar_url': 'test'}
 
 
-@pytest.fixture(autouse=True)
-def no_requests(monkeypatch):
-    monkeypatch.delattr('requests.sessions.Session.request')
-
-
-@pytest.fixture
-def backend(tmpdir):
-    temp_file = tmpdir.join('test.txt')
-    temp_file.write('')
-    return temp_file
-
-
 @pytest.fixture(params=[None, 'python'])
 def username(request):
     return request.param
